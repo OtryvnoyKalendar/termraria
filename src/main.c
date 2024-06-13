@@ -12,6 +12,7 @@
 
 Tworld world;
 POINT CamPos = {-3, -3}; // позиция верхнего левого угла области копирования
+int seed = 0;
 
 Tmap map;
 int mapColors[MAP_HEIGHT][MAP_WIDTH+1];
@@ -26,7 +27,11 @@ char SubChar[] = {SYMBOL_SAND, SYMBOL_WATER, SYMBOL_WALL, SYMBOL_NOTHING};
 char* SubName[] = {"sand", "water", "wall", "space"};
 
 TPlayer player = {WORLD_WIDTH/2,90, 3,3, 2, 0};
-POINT dirInc[] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0} }; // WSAD
+POINT dirInc[] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; // WASD
+
+char solidBlocks[] = {SYMBOL_SAND, SYMBOL_WALL, SYMBOL_SOIL, SYMBOL_OUTSIDE, 0};
+char liquidBlocks[] = {SYMBOL_WATER, 0};
+//char gasBlocks[] = {0};
 
 void OpenConsoleMode() {
 	setConsoleSize(MAP_WIDTH, MAP_HEIGHT);
@@ -56,7 +61,7 @@ void InitWorld() {
 	ClearMap();
 	memset(world, SYMBOL_SOIL, sizeof(world));
 	ClearMapColors();
-	GenerateWorld(1);
+	GenerateWorld(seed);
 }
 
 void GameControl() {
@@ -74,7 +79,7 @@ void GameControl() {
 	int BreakCount = 0;
 	int BreakCountMax = 5;
 	
-	while(MOUSE_LEFT_PRESSED) {
+	while(MOUSE_EVENTS_CHECK) {
 		GetMouseState(&CursY, &CursX, &MouseFlags);
 		PutSubstance();
 		
@@ -93,7 +98,7 @@ void ShowTUI() {
 	snprintf(CharBuf, CharBufSize, "x = %3d, y = %3d, f = %09x", CursX, CursY, MouseFlags);
 	PutText(CharBuf, 29, 3, COLOR_WHITE);
 	
-	snprintf(CharBuf, CharBufSize, "substance: %s", SubName[substance]);
+	snprintf(CharBuf, CharBufSize, "substance: %6s, rad: %2d", SubName[substance], SubRad);
 	PutText(CharBuf, 29, 40, COLOR_WHITE);
 }
 

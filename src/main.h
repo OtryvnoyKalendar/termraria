@@ -12,6 +12,15 @@ typedef struct {
 	int ay;
 } TPlayer;
 
+typedef struct tagRECT {
+	long left;
+	long top;
+	long right;
+	long bottom;
+} RECT, *PRECT, *NPRECT, *LPRECT;
+
+typedef enum {B_SOLID, B_LIQUID, B_GAS} TBlockType;
+
 // карта игры
 
 #define WORLD_HEIGHT	600
@@ -30,6 +39,9 @@ extern TPlayer player;
 extern POINT dirInc[];
 extern Tworld world;
 
+extern char solidBlocks[];
+extern char liquidBlocks[];
+
 extern Tmap map;
 extern int mapColors[MAP_HEIGHT][MAP_WIDTH+1];
 
@@ -39,15 +51,8 @@ extern char SubChar[];
 extern int CursX;
 extern int CursY;
 extern unsigned MouseFlags;
-//#define MOUSE_LEFT_PRESSED (MouseFlags & BUTTON1_PRESSED)
-#define MOUSE_LEFT_PRESSED (MouseFlags & 0x10000000)
 
-#define MOUSE_RIGHT_PRESSED (MouseFlags & BUTTON3_PRESSED)
-							// || (MouseFlags & BUTTON1_CLICKED))
-// 0x00000004
-//  - любая нажата
-
-#define GAME_DELAY_CONSTANT 40
+#define GAME_DELAY_CONSTANT 50
 
 #define SYMBOL_NOTHING 	' '
 //#define SYMBOL_SAND 	(char)176

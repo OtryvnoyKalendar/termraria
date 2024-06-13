@@ -83,7 +83,7 @@ void OpenNcursesMode() {
 	curs_set(1); //curs_set(0);
 	
 	keypad(stdscr, TRUE); // mouse events getting reported as KEY_MOUSE
-	mousemask(MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
+	mousemask(MOUSE_EVENTS_INIT | REPORT_MOUSE_POSITION, NULL);
 	printf("\033[?1003h\n"); // Makes the terminal report mouse movement events
 	
 	if(has_mouse() == FALSE)
@@ -104,6 +104,8 @@ void CloseNcursesMode() {
 
 // Получение координат курсора
 void GetMouseState(int* y, int* x, unsigned* flags) {
+	//*flags = 0x0;
+	
 	if(wgetch(stdscr) == KEY_MOUSE) {
 		MEVENT event;
 		
