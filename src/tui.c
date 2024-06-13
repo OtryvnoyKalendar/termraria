@@ -1,6 +1,8 @@
 #include "main.h"
 #include "core.h"
 #include <string.h> // для memset()
+#include "math.h"
+#include "movesub.h"
 
 // отрисовка игры
 
@@ -16,6 +18,15 @@ void PutSymbolToConsole(int y, int x, char ch, int color) {
 	if(color != -1)
 		attron(COLOR_PAIR(color));
 	addch(ch);
+}
+
+void ShowPlayer() {
+	int x = player.x - CamPos.x;
+	int y = player.y - CamPos.y;
+	
+	for(int i = x; i < x + player.w; i++)
+		for(int j = y; j < y + player.h; j++)
+			map[j][i] = SYMBOL_PLAYER;
 }
 
 void ShowMap() {
@@ -58,6 +69,15 @@ void DrawSymbolInConsole(int y, int x, char ch, int color) {
 	move(y, x);
 	if(color != -1) attron(COLOR_PAIR(color));
 	addch(ch);
+}
+
+void PutCircle(int y, int x, int rad, char symbol) {
+	for(int i = x-rad; i < x+rad; i++)
+		for(int j = y-rad; j < y+rad; j++)
+			if(IsPointInWorld(j, i)
+				&& ( pow(x-i, 2) + pow(y-j, 2) <= pow(rad, 2) ) ) {
+					world[j][i] = symbol;
+				}
 }
 
 void PutText(const char* message, int ystart, int xstart, int color) {

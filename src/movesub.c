@@ -24,7 +24,7 @@ void WorldToMapFrom(int y, int x) {
 }
 
 void FindWaterPath(int y, int x) {
-	if(!IsPointInMap(y, x))
+	if(!IsPointInWorld(y, x))
 		return;
 	
 	if(y >= waterLevel && y > foundPoint.y) {

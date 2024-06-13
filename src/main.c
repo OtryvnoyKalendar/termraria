@@ -8,6 +8,7 @@
 #include "keys.h"
 #include "mouse.h"
 #include "movesub.h"
+#include "gameplay.h"
 
 Tworld world;
 POINT CamPos = {-3, -3}; // позиция верхнего левого угла области копирования
@@ -23,6 +24,9 @@ enum {S_SAND = 0, S_WATER, S_WALL, S_NOTHING, S_LAST};
 int substance = S_SAND;
 char SubChar[] = {SYMBOL_SAND, SYMBOL_WATER, SYMBOL_WALL, SYMBOL_NOTHING};
 char* SubName[] = {"sand", "water", "wall", "space"};
+
+TPlayer player = {WORLD_WIDTH/2,90, 3,3, 2, 0};
+POINT dirInc[] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0} }; // WSAD
 
 void OpenConsoleMode() {
 	setConsoleSize(MAP_WIDTH, MAP_HEIGHT);
@@ -52,6 +56,7 @@ void InitWorld() {
 	ClearMap();
 	memset(world, SYMBOL_SOIL, sizeof(world));
 	ClearMapColors();
+	GenerateWorld(1);
 }
 
 void GameControl() {
@@ -77,6 +82,9 @@ void GameControl() {
 		if(BreakCount >= BreakCountMax)
 			break;
 	}
+	
+	PlayerMove(&player, KEY_W, KEY_S, KEY_A, KEY_D);
+	FocusToPlayer();
 }
 
 void ShowTUI() {
@@ -93,6 +101,12 @@ void GameplayLogic() {
 	MoveSubstance();
 }
 
+void ShowGame() {
+	ShowPlayer();
+	ShowMap();
+	ShowTUI();
+}
+
 int main() {
 	OpenConsoleMode();
 	InitWorld();
@@ -105,8 +119,8 @@ int main() {
 		
 		GameplayLogic();
 		WorldToMapFrom(CamPos.y, CamPos.x);
-		ShowMap();
-		ShowTUI();
+		
+		ShowGame();
 	}
 	
 	CloseProgram();

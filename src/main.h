@@ -5,6 +5,13 @@ typedef struct {
 	int y;
 } POINT;
 
+typedef struct {
+	int x, y;
+	int w, h;
+	int speed;
+	int ay;
+} TPlayer;
+
 // карта игры
 
 #define WORLD_HEIGHT	600
@@ -19,7 +26,8 @@ typedef char Tmap[MAP_HEIGHT][MAP_WIDTH+1];
 typedef char Tworld[WORLD_HEIGHT][WORLD_WIDTH+1];
 
 extern POINT CamPos;
-
+extern TPlayer player;
+extern POINT dirInc[];
 extern Tworld world;
 
 extern Tmap map;
