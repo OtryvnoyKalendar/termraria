@@ -33,6 +33,10 @@ void ShowMap() {
 					color = COLOR_WALL; break;
 				case SYMBOL_PLAYER:
 					color = COLOR_PLAYER; break;
+				case SYMBOL_SOIL:
+					color = COLOR_SOIL; break;
+				case SYMBOL_OUTSIDE:
+					color = COLOR_OUTSIDE; break;
 			}
 			
 			PutSymbolToConsole(i, j, symbol, color);

@@ -1,3 +1,4 @@
+#pragma once
 
 int isMapCellExists(int y, int x);
 void PutSymbolToConsole(int y, int x, char ch, int color);

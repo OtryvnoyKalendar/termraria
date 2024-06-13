@@ -1,4 +1,4 @@
-#include <string.h> // для strlen()
+#include <string.h> // для strlen(), memset()
 #include <unistd.h> // для usleep()
 
 // мои функции и процедуры
@@ -9,7 +9,10 @@
 #include "mouse.h"
 #include "movesub.h"
 
-char map[MAP_HEIGHT][MAP_WIDTH+1];
+Tworld world;
+POINT CamPos = {-3, -3}; // позиция верхнего левого угла области копирования
+
+Tmap map;
 int mapColors[MAP_HEIGHT][MAP_WIDTH+1];
 
 int CursX = -1;
@@ -47,6 +50,7 @@ void SelectSubstance() {
 
 void InitWorld() {
 	ClearMap();
+	memset(world, SYMBOL_SOIL, sizeof(world));
 	ClearMapColors();
 }
 
@@ -100,6 +104,7 @@ int main() {
 		GameControl();
 		
 		GameplayLogic();
+		WorldToMapFrom(CamPos.y, CamPos.x);
 		ShowMap();
 		ShowTUI();
 	}

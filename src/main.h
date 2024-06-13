@@ -7,12 +7,22 @@ typedef struct {
 
 // карта игры
 
+#define WORLD_HEIGHT	600
+#define WORLD_WIDTH		300
+
+// поле видимости
+
 #define MAP_HEIGHT	30
 #define MAP_WIDTH	80
 
 typedef char Tmap[MAP_HEIGHT][MAP_WIDTH+1];
+typedef char Tworld[WORLD_HEIGHT][WORLD_WIDTH+1];
 
-extern char map[MAP_HEIGHT][MAP_WIDTH+1];
+extern POINT CamPos;
+
+extern Tworld world;
+
+extern Tmap map;
 extern int mapColors[MAP_HEIGHT][MAP_WIDTH+1];
 
 extern int substance;
@@ -37,12 +47,16 @@ extern unsigned MouseFlags;
 //#define SYMBOL_WATER 	(char)219
 #define SYMBOL_WATER 	'%'
 #define SYMBOL_WALL 	'#'
+#define SYMBOL_SOIL 	'&'
 #define SYMBOL_PLAYER 	'@'
+#define SYMBOL_OUTSIDE 	'.'
 
 #define COLOR_SAND		COLOR_YELLOW
 #define COLOR_WATER		COLOR_BLUE
 #define COLOR_WALL 		COLOR_WHITE
+#define COLOR_SOIL 		COLOR_GREEN
 #define COLOR_PLAYER 	COLOR_RED
+#define COLOR_OUTSIDE 	COLOR_RED
 
 #define COLOR_STANDARD COLOR_GREEN
 #define COLOR_TEXT COLOR_WHITE
