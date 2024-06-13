@@ -78,10 +78,10 @@ void GameControl() {
 void ShowTUI() {
 	int CharBufSize = 40;
 	char CharBuf[CharBufSize];
-	snprintf(CharBuf, CharBufSize, "x = %d, y = %d, f = %09x         ", CursX, CursY, MouseFlags);
+	snprintf(CharBuf, CharBufSize, "x = %3d, y = %3d, f = %09x", CursX, CursY, MouseFlags);
 	PutText(CharBuf, 29, 3, COLOR_WHITE);
 	
-	snprintf(CharBuf, CharBufSize, "sub=%d, %s       ", substance, SubName[substance]);
+	snprintf(CharBuf, CharBufSize, "substance: %s", SubName[substance]);
 	PutText(CharBuf, 29, 40, COLOR_WHITE);
 }
 
