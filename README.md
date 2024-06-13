@@ -1,6 +1,6 @@
 # termraria
 
-![screenshot](https://github.com/OtryvnoyKalendar/Console-Quest/blob/main/screenshots/screenshot%201.png)
+![screenshot](https://github.com/OtryvnoyKalendar/termraria/blob/main/screenshots/screenshot%201.png)
 
 ### Общее описание
 Termraria - это консольная игра песочница, которая работает в Linux. Это только прототип игры, которую я написал для практики языка C.
