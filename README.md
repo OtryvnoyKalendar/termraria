@@ -1,6 +1,5 @@
 # termraria
 
-![screenshot](https://github.com/OtryvnoyKalendar/termraria/blob/main/screenshots/screenshot%201.png)
 ![screenshot](https://github.com/OtryvnoyKalendar/termraria/blob/main/screenshots/screenshot%202.png)
 
 ### Общее описание
